@@ -1,4 +1,4 @@
-# Oxidized Commit Script
+Oxidized Commit Script
 ========================
 This is a commit script for Juniper devices that kicks off an Oxidized run. It basically makes a HTTP request to the Oxidized REST API to place your device in the front of the queue to have its configuration pulled.
 
@@ -6,7 +6,7 @@ Requirements
 ============
 - Juniper routers/switches running at least version 10 of the JunOS operating system
 - A working Oxidized installation on an NMS
-- Permissions to install the script of your Juniper gear
+- Permissions to install the script on your Juniper gear
 
 Installation
 ============
