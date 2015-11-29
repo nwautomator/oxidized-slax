@@ -1,0 +1,37 @@
+version 1.1;
+
+/*
+Copyright (C) 2015 Chris Freas (code@packetbusters.net)
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+*/
+
+ns junos = "http://xml.juniper.net/junos/*/junos";
+ns xnm = "http://xml.juniper.net/xnm/1.1/xnm";
+ns jcs = "http://xml.juniper.net/junos/commit-scripts/1.0";
+ns rpclib = "http://xml.juniper.net/rpclib";
+
+import "../import/junos.xsl";
+
+match configuration {
+    var $conn = jcs:open();
+    var $OXIDIZED-SERVER = "http://nms:8888/";
+
+    var $config_query = "node/next/" _ $hostname;
+
+    var $config_url = $OXIDIZED-SERVER _ $config_query;
+
+    expr jcs:syslog("daemon.crit", "Calling Oxidized at " _ $config_url);
+
+    var $http_get = <file-copy> {
+        <source> $config_url;
+        <destination> "/dev/null";
+    }
+
+    var $result = jcs:execute($conn,$http_get);
+    expr $result;
+}
