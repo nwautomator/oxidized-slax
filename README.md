@@ -11,7 +11,7 @@ Requirements
 Installation
 ============
 0. Clone this repository (```git clone https://github.com/nwautomator/oxidized-slax.git```)
-1. Change the $OXIDIZED-SERVER URL in the script to the appropriate NMS system for your environment
+1. Change the `$OXIDIZED-SERVER` URL in the script to the appropriate NMS system for your environment
 2. Use SCP (or WinSCP) to copy the script to `/var/db/scripts/commit` on your Juniper devices
 3. Use `set system scripts commit oxidized.slax` in configuration mode to activate the script
 4. Do a few changes and commits to make sure it's working
